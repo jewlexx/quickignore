@@ -13,11 +13,15 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+
     printf("Parsing args\n");
     IgnoreFile file = parse_args(argc, argv);
     printf("Parsed args\n");
-    
+
     request_url(&file);
+
+    curl_global_cleanup();
 
     return 0;
 }
