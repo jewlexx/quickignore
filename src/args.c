@@ -47,9 +47,17 @@ IgnoreFile parse_args(int argc, char *argv[]) {
     char *base_url = "https://www.toptal.com/developers/gitignore/api/";
     size_t total_url_size = strlen(file.name) + strlen(base_url);
 
-    file.url = malloc(sizeof(char) * total_url_size);
-    file.url = strcat(file.url, base_url);
-    file.url = strcat(file.url, file.name);
+    file.url = malloc(sizeof(char) * (total_url_size + 1));
+
+    for (int i = 0; i < strlen(base_url); i++) {
+        file.url[i] = base_url[i];
+    }
+    for (int i = 48; i < total_url_size; i++) {
+        char next = file.name[i - 48];
+        file.url[i] = next;
+    }
+    // Append null character
+    file.url[total_url_size] = '\0';
 
     printf("name: %s\n", file.name);
     printf("url: %s\n", file.url);
