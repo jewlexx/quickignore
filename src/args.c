@@ -40,8 +40,6 @@ IgnoreFile parse_args(int argc, char *argv[]) {
                 char *full = full_arg(argv[i][1]);
                 parse_arg(&file, full, argv[i + 1]);
             }
-        } else {
-            file.name = argv[i];
         }
     }
 
