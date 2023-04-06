@@ -10,12 +10,13 @@ int main(int argc, char *argv[]) {
         printf("Usage: %s <url>\n", argv[0]);
         return 1;
     }
-    
+
     printf("Parsing args\n");
     IgnoreFile file = parse_args(argc, argv);
     printf("Parsed args\n");
 
     request_url(&file);
+    printf("Downloaded gitignore\n");
 
     return 0;
 }
