@@ -2,8 +2,6 @@
 // Created by Juliette Cordor on 6/04/2023.
 //
 
-#include <curl/curl.h>
-
 #include "../include/requests.h"
 
 char *path;
@@ -35,6 +33,7 @@ void request_url(IgnoreFile *file) {
     }
 
     printf("initializing curl\n");
+    curl_global_cleanup();
     CURL *curl = curl_easy_init();
     printf("Initialized CURL\n");
     curl_easy_setopt(curl, CURLOPT_URL, url);
@@ -45,4 +44,5 @@ void request_url(IgnoreFile *file) {
     printf("Exit Code: %d\n", success);
 
     curl_easy_cleanup(curl);
+    curl_global_cleanup();
 }
