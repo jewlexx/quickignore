@@ -2,7 +2,7 @@
 // Created by julie on 6/04/2023.
 //
 
-#include "include/args.h"
+#include "../include/args.h"
 
 void parse_arg(IgnoreFile *file, char *arg, char *next) {
     if (strcmp(arg, "name") == 0) {

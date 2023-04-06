@@ -2,7 +2,7 @@
 // Created by julie on 6/04/2023.
 //
 
-#include "include/slicing.h"
+#include "../include/slicing.h"
 
 void slice(const char *str, char *result, size_t start, size_t end) {
     strncpy(result, str + start, end - start);
