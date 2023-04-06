@@ -36,6 +36,7 @@ IgnoreFile parse_args(int argc, char *argv[]) {
                 slice(argv[i], arg_name, 2, strlen(argv[i]) - 2);
 
                 parse_arg(&file, arg_name, argv[i + 1]);
+                free(arg_name);
             } else {
                 char *full = full_arg(argv[i][1]);
                 parse_arg(&file, full, argv[i + 1]);
