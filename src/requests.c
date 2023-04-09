@@ -3,12 +3,14 @@
 //
 
 #include "../include/requests.h"
+#include "../include/args.h"
 
+IgnoreFile *args;
 char *path;
 
 size_t write_data(void *buff, size_t size, size_t nmemb, void *userp) {
   printf("Writing");
-  FILE *fp = fopen("rustignore.txt", "w");
+  FILE *fp = fopen(args->path, "w");
 
   if (fp == NULL) {
     perror("failed to open file\n");
@@ -24,6 +26,7 @@ size_t write_data(void *buff, size_t size, size_t nmemb, void *userp) {
 }
 
 void request_url(IgnoreFile *file) {
+  args = file;
   char *url = file->url;
   if (url == NULL) {
     printf("request_url: url is null\n");
