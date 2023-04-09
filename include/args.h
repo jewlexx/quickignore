@@ -5,6 +5,7 @@
 #ifndef QUICKIGNORE_ARGS_H
 #define QUICKIGNORE_ARGS_H
 
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

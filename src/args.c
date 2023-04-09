@@ -62,23 +62,68 @@ IgnoreFile parse_args(int argc, char *argv[]) {
       .url = NULL,
       .path = ".gitignore",
   };
+  int help_flag = 0;
 
-  for (int i = 1; i < argc; i++) {
-    char *arg = argv[i];
+  struct option long_opts[] = {
+      {"help", no_argument, &help_flag, 1},
+      {"name", required_argument, NULL, 'n'},
+      {"path", optional_argument, NULL, 'p'},
+  };
 
-    if (arg[0] == '-') {
-      if (arg[1] == '-') {
-        char *arg_name = malloc(sizeof(char) * (strlen(arg) - 2));
-        slice(arg, arg_name, 2, strlen(arg));
+  while (1) {
+    int opt = getopt_long(argc, argv, "n:p:h", long_opts, 0);
 
-        parse_arg(&file, arg_name, argv[i + 1]);
-        free(arg_name);
-      } else {
-        char *full = full_arg(arg[1]);
-        parse_arg(&file, full, argv[i + 1]);
-      }
+    // No more options
+    if (opt == -1) {
+      break;
+    }
+
+    switch (opt) {
+    case 'h':
+      help_flag = 1;
+
+      break;
+    case 'n':
+      printf("Setting name to %s\n", optarg);
+      size_t len = strlen(optarg) + 1;
+      printf("pplen: %zu\n", len);
+      char test_dest[256] = {0};
+      file.name = malloc(sizeof(char) * len);
+      strncpy(test_dest, optarg, 1);
+      printf("Reaches this");
+      // file.name[sizeof(file.name) - 1] = '\0';
+
+      break;
+    case 'p':
+      file.path = malloc((strlen(optarg) + 1) * sizeof(char));
+      printf("Setting path to %s\n", optarg);
+      strncpy(file.path, optarg, strlen(optarg));
+      file.path[sizeof(file.path) - 1] = '\0';
+      break;
+    case '?':
+      usage(1);
+      break;
+    default:
+      break;
     }
   }
+
+  // for (int i = 1; i < argc; i++) {
+  //   char *arg = argv[i];
+
+  //   if (arg[0] == '-') {
+  //     if (arg[1] == '-') {
+  //       char *arg_name = malloc(sizeof(char) * (strlen(arg) - 2));
+  //       slice(arg, arg_name, 2, strlen(arg));
+
+  //       parse_arg(&file, arg_name, argv[i + 1]);
+  //       free(arg_name);
+  //     } else {
+  //       char *full = full_arg(arg[1]);
+  //       parse_arg(&file, full, argv[i + 1]);
+  //     }
+  //   }
+  // }
 
   char *base_url = "https://www.toptal.com/developers/gitignore/api/";
   size_t total_url_size = strlen(file.name) + strlen(base_url);
