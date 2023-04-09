@@ -1,3 +1,5 @@
+.cache/
+
 # Test Files
 test.gitignore
 
@@ -103,6 +105,7 @@ dkms.conf
 
 # CMake
 cmake-build-*/
+build/
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml

@@ -10,11 +10,11 @@ size_t write_data(void *buff, size_t size, size_t nmemb, void *userp) {
   FILE *fp = fopen("rustignore.txt", "w");
 
   if (fp == NULL) {
-    printf("write_data: fp is null\n");
+    printf("Failed to open file\n");
     exit(1);
   }
 
-  fwrite(buff, size, nmemb, fp);
+  size_t written = fwrite(buff, size, nmemb, fp);
 
   fclose(fp);
 }
