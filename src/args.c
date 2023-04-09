@@ -56,7 +56,7 @@ IgnoreFile parse_args(int argc, char *argv[]) {
     if (arg[0] == '-') {
       if (arg[1] == '-') {
         char *arg_name = malloc(sizeof(char) * (strlen(arg) - 2));
-        slice(arg, arg_name, 2, strlen(arg) - 2);
+        slice(arg, arg_name, 2, strlen(arg));
 
         parse_arg(&file, arg_name, argv[i + 1]);
         free(arg_name);
