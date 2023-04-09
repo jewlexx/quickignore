@@ -4,16 +4,19 @@
 
 #include "../include/args.h"
 
-void usage() {
-  printf("usage: quickignore [OPTION]\n");
+void usage(int status) {
+  printf("usage: quickignore <URL> [OPTION]\n");
+
+  printf("  -n, --name=TEMPLATE\t"
+         "Name of the template to grab\n");
+
+  printf("  -p, --path=STRING\t"
+         "File path to write the gitignore to\n");
+
   printf("  -h, --help\t\t"
          "Print this help and exit.\n");
-  printf("  -f, --file[=FILENAME]\t"
-         "Write all output to a file (defaults to out.txt).\n");
-  printf("  -m, --msg=STRING\t"
-         "Output a particular message rather than 'Hello world'.\n");
 
-  exit(0);
+  exit(status);
 }
 
 void parse_arg(IgnoreFile *file, char *arg, char *next) {
@@ -22,7 +25,7 @@ void parse_arg(IgnoreFile *file, char *arg, char *next) {
   } else if (strcmp(arg, "path") == 0) {
     file->path = next;
   } else if (strcmp(arg, "help") == 0) {
-    usage();
+    usage(0);
   }
 }
 
@@ -34,6 +37,9 @@ char *full_arg(const char flag) {
     return "name";
   case 'p':
     return "path";
+  default:
+    perror("Unknown flag");
+    usage(1);
   }
 }
 

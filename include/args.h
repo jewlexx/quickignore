@@ -17,7 +17,7 @@ typedef struct {
   char *url;
 } IgnoreFile;
 
-void usage();
+void usage(int status);
 
 void parse_arg(IgnoreFile *file, char *arg, char *next);
 
