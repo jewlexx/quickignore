@@ -81,23 +81,6 @@ IgnoreFile parse_args(int argc, char *argv[]) {
         }
     }
 
-    // for (int i = 1; i < argc; i++) {
-    //   char *arg = argv[i];
-
-    //   if (arg[0] == '-') {
-    //     if (arg[1] == '-') {
-    //       char *arg_name = malloc(sizeof(char) * (strlen(arg) - 2));
-    //       slice(arg, arg_name, 2, strlen(arg));
-
-    //       parse_arg(&file, arg_name, argv[i + 1]);
-    //       free(arg_name);
-    //     } else {
-    //       char *full = full_arg(arg[1]);
-    //       parse_arg(&file, full, argv[i + 1]);
-    //     }
-    //   }
-    // }
-
     if (help_flag) {
         usage(0);
     }
@@ -116,11 +99,6 @@ IgnoreFile parse_args(int argc, char *argv[]) {
     }
     // Append null character
     file.url[total_url_size] = '\0';
-
-    printf("name: %s\n", name);
-    printf("url: %s\n", file.url);
-    printf("url len: %zu\n", total_url_size);
-    printf("path: %s\n", file.path);
 
     if (remove_file) {
         exit(remove(file.path));
