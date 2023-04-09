@@ -40,6 +40,9 @@ char *full_arg(const char flag) {
   default:
     perror("Unknown flag");
     usage(1);
+    // Return nothing to hush compiler warnings.
+    // Will ALWAYS exit before this line
+    return NULL;
   }
 }
 
