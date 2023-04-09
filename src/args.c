@@ -36,14 +36,14 @@ IgnoreFile parse_args(int argc, char *argv[]) {
     struct option long_opts[] = {
             {"help",      no_argument, &help_flag, 1},
             {"name",      required_argument, NULL, 'n'},
-            {"path",      required_argument, NULL, 'p'},
+            {"path",      optional_argument, NULL, 'p'},
             {"overwrite", no_argument,       NULL, 'o'},
     };
 
     int opt;
 
     while (1) {
-        opt = getopt_long(argc, argv, "n:p:oh", long_opts, NULL);
+        opt = getopt_long(argc, argv, "n:p::oh", long_opts, NULL);
 
         // No more options
         if (opt == -1) {
