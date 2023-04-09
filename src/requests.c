@@ -10,7 +10,7 @@ char *path;
 
 size_t write_data(void *buff, size_t size, size_t nmemb, void *userp) {
   printf("Writing");
-  FILE *fp = fopen(args->path, "w");
+  FILE *fp = fopen(args->path, "a");
 
   if (fp == NULL) {
     perror("failed to open file\n");

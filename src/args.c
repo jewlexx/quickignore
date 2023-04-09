@@ -16,7 +16,8 @@ void usage(int status) {
          "File path to write the gitignore to\n");
 
   printf("\t--overwrite\t"
-         "Overwrite any existing gitignore file\n");
+         "Overwrite any existing gitignore file. By default will just append "
+         "to the existing file\n");
 
   printf("\t-h, --help\t\t"
          "Print this help and exit.\n");
