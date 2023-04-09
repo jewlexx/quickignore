@@ -13,16 +13,15 @@
 #include "slicing.h"
 
 typedef struct {
-  char *name;
-  char *path;
-  char *url;
+    char *path;
+    char *url;
 } IgnoreFile;
 
 void usage(int status);
 
 void parse_arg(IgnoreFile *file, char *arg, char *next);
 
-char *full_arg(const char flag);
+char *full_arg(char flag);
 
 IgnoreFile parse_args(int argc, char *argv[]);
 
