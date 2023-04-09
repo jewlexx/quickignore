@@ -51,15 +51,17 @@ IgnoreFile parse_args(int argc, char *argv[]) {
   };
 
   for (int i = 1; i < argc; i++) {
-    if (argv[i][0] == '-') {
-      if (argv[i][1] == '-') {
-        char *arg_name = malloc(sizeof(char) * (strlen(argv[i]) - 2));
-        slice(argv[i], arg_name, 2, strlen(argv[i]) - 2);
+    char *arg = argv[i];
+
+    if (arg[0] == '-') {
+      if (arg[1] == '-') {
+        char *arg_name = malloc(sizeof(char) * (strlen(arg) - 2));
+        slice(arg, arg_name, 2, strlen(arg) - 2);
 
         parse_arg(&file, arg_name, argv[i + 1]);
         free(arg_name);
       } else {
-        char *full = full_arg(argv[i][1]);
+        char *full = full_arg(arg[1]);
         parse_arg(&file, full, argv[i + 1]);
       }
     }
