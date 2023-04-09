@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #include "slicing.h"
 
 typedef struct {
@@ -17,6 +16,8 @@ typedef struct {
   char *path;
   char *url;
 } IgnoreFile;
+
+void usage();
 
 void parse_arg(IgnoreFile *file, char *arg, char *next);
 

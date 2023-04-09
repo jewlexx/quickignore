@@ -4,16 +4,32 @@
 
 #include "../include/args.h"
 
+void usage() {
+  printf("usage: quickignore [OPTION]\n");
+  printf("  -h, --help\t\t"
+         "Print this help and exit.\n");
+  printf("  -f, --file[=FILENAME]\t"
+         "Write all output to a file (defaults to out.txt).\n");
+  printf("  -m, --msg=STRING\t"
+         "Output a particular message rather than 'Hello world'.\n");
+
+  exit(0);
+}
+
 void parse_arg(IgnoreFile *file, char *arg, char *next) {
   if (strcmp(arg, "name") == 0) {
     file->name = next;
   } else if (strcmp(arg, "path") == 0) {
     file->path = next;
+  } else if (strcmp(arg, "help") == 0) {
+    usage();
   }
 }
 
 char *full_arg(const char flag) {
   switch (flag) {
+  case 'h':
+    return "help";
   case 'n':
     return "name";
   case 'p':
