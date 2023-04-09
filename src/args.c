@@ -8,7 +8,7 @@ void usage(int status) {
   printf("usage: quickignore <URL> [OPTION]\n");
 
   printf("  -n, --name=TEMPLATE\t"
-         "Name of the template to grab\n");
+         "Name of the template to grab. Can be a comma seperated list\n");
 
   printf("  -p, --path=STRING\t"
          "File path to write the gitignore to\n");
