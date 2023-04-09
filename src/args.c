@@ -86,7 +86,7 @@ IgnoreFile parse_args(int argc, char *argv[]) {
             case 'n': {
                 size_t len = strlen(optarg) + 1;
                 file.name = malloc(sizeof(char) * len);
-                strncpy(file.name, optarg, 1);
+                strncpy(file.name, optarg, len);
                 file.name[sizeof(file.name) - 1] = '\0';
 
                 break;
