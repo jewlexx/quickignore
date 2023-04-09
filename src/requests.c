@@ -7,6 +7,7 @@
 char *path;
 
 size_t write_data(void *buff, size_t size, size_t nmemb, void *userp) {
+  printf("Writing");
   FILE *fp = fopen("rustignore.txt", "w");
 
   if (fp == NULL) {

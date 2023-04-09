@@ -4,28 +4,35 @@
 
 #include "../include/args.h"
 
+static int remove_file = 0;
+
 void usage(int status) {
   printf("usage: quickignore <URL> [OPTION]\n");
 
-  printf("  -n, --name=TEMPLATE\t"
+  printf("\t-n, --name=TEMPLATE\t"
          "Name of the template to grab. Can be a comma seperated list\n");
 
-  printf("  -p, --path=STRING\t"
+  printf("\t-p, --path=STRING\t"
          "File path to write the gitignore to\n");
 
-  printf("  -h, --help\t\t"
+  printf("\t--overwrite\t"
+         "Overwrite any existing gitignore file\n");
+
+  printf("\t-h, --help\t\t"
          "Print this help and exit.\n");
 
   exit(status);
 }
 
 void parse_arg(IgnoreFile *file, char *arg, char *next) {
-  if (strcmp(arg, "name") == 0) {
+  if (strcmp(arg, "help") == 0) {
+    usage(0);
+  } else if (strcmp(arg, "name") == 0) {
     file->name = next;
   } else if (strcmp(arg, "path") == 0) {
     file->path = next;
-  } else if (strcmp(arg, "help") == 0) {
-    usage(0);
+  } else if (strcmp(arg, "overwrite") == 0) {
+    remove_file = 1;
   }
 }
 
@@ -50,7 +57,7 @@ IgnoreFile parse_args(int argc, char *argv[]) {
   IgnoreFile file = {
       .name = NULL,
       .url = NULL,
-      .path = NULL,
+      .path = ".gitignore",
   };
 
   for (int i = 1; i < argc; i++) {
@@ -89,6 +96,10 @@ IgnoreFile parse_args(int argc, char *argv[]) {
   printf("url: %s\n", file.url);
   printf("url len: %zu\n", total_url_size);
   printf("path: %s\n", file.path);
+
+  if (remove_file) {
+    exit(remove(file.path));
+  }
 
   return file;
 }
