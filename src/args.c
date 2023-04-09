@@ -26,11 +26,13 @@ void usage(int status) {
 }
 
 void parse_arg(IgnoreFile *file, char *arg, char *next) {
+  printf("parsing arg %s\n", arg);
   if (strcmp(arg, "help") == 0) {
     usage(0);
   } else if (strcmp(arg, "name") == 0) {
     file->name = next;
   } else if (strcmp(arg, "path") == 0) {
+    printf("Overwriting %s with %s\n", file->path, next);
     file->path = next;
   } else if (strcmp(arg, "overwrite") == 0) {
     remove_file = 1;
