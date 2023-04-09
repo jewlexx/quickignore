@@ -36,12 +36,14 @@ IgnoreFile parse_args(int argc, char *argv[]) {
     struct option long_opts[] = {
             {"help",      no_argument, &help_flag, 1},
             {"name",      required_argument, NULL, 'n'},
-            {"path",      optional_argument, NULL, 'p'},
+            {"path",      required_argument, NULL, 'p'},
             {"overwrite", no_argument,       NULL, 'o'},
     };
 
+    int opt;
+
     while (1) {
-        int opt = getopt_long(argc, argv, "n:p::oh", long_opts, 0);
+        opt = getopt_long(argc, argv, "n:p:oh", long_opts, NULL);
 
         // No more options
         if (opt == -1) {
@@ -58,15 +60,14 @@ IgnoreFile parse_args(int argc, char *argv[]) {
                 name = malloc(sizeof(char) * len);
                 strncpy(name, optarg, len);
                 name[sizeof(name) - 1] = '\0';
-
-                break;
             }
+                break;
             case 'p':
                 if (optarg != NULL) {
                     size_t len = strlen(optarg) + 1 * sizeof(char);
                     file.path = malloc(len * sizeof(char));
                     strncpy(file.path, optarg, strlen(optarg));
-                    file.path[sizeof(file.path) - 1] = '\0';
+                    file.path[strlen(file.path)] = '\0';
                 }
                 break;
             case 'o':
