@@ -10,13 +10,16 @@ size_t write_data(void *buff, size_t size, size_t nmemb, void *userp) {
   FILE *fp = fopen("rustignore.txt", "w");
 
   if (fp == NULL) {
-    printf("Failed to open file\n");
+    perror("failed to open file\n");
     exit(1);
   }
 
   size_t written = fwrite(buff, size, nmemb, fp);
 
-  fclose(fp);
+  if (fclose(fp)) /* Close the stream. */
+    perror("failed to close file");
+
+  return written;
 }
 
 void request_url(IgnoreFile *file) {
@@ -42,6 +45,9 @@ void request_url(IgnoreFile *file) {
   printf("Performed request\n");
 
   printf("Exit Code: %d\n", success);
+  const char *err_desc = curl_easy_strerror(success);
+
+  printf("Error: %s\n", err_desc);
 
   curl_easy_cleanup(curl);
   curl_global_cleanup();
