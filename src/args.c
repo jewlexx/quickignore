@@ -12,7 +12,7 @@ void usage(int status) {
     printf("\t-n, --name=TEMPLATE\t"
            "Name of the template to grab. Can be a comma seperated list\n");
 
-    printf("\t-p, --path=STRING\t"
+    printf("\t-p, --path[=STRING]\t"
            "File path to write the gitignore to\n");
 
     printf("\t--overwrite\t"
@@ -97,6 +97,10 @@ IgnoreFile parse_args(int argc, char *argv[]) {
     //     }
     //   }
     // }
+
+    if (help_flag) {
+        usage(0);
+    }
 
     char *base_url = "https://www.toptal.com/developers/gitignore/api/";
     size_t total_url_size = strlen(name) + strlen(base_url);
