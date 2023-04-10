@@ -8,7 +8,6 @@ IgnoreFile *args;
 char *path;
 
 size_t write_data(void *buff, size_t size, size_t nmemb, void *userp) {
-    printf("Writing");
     FILE *fp = fopen(args->path, "a");
 
     if (fp == NULL) {
@@ -44,9 +43,12 @@ void request_url(IgnoreFile *file) {
     CURL *curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_URL, url);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-    CURLcode success = curl_easy_perform(curl);
+    CURLcode error = curl_easy_perform(curl);
 
-    const char *err_desc = curl_easy_strerror(success);
+    if (error != CURLE_OK) {
+        const char *err_desc = curl_easy_strerror(error);
+        printf("%s\n", err_desc);
+    }
 
     curl_easy_cleanup(curl);
     curl_global_cleanup();
