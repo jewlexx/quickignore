@@ -10,7 +10,7 @@ size_t write_data(void *buff, size_t size, size_t nmemb, FILE *fp) {
     return written;
 }
 
-void request_url(IgnoreFile *file) {
+void request_url(IgnoreArgs *file) {
     if (file->url == NULL) {
         printf("request_url: url is null\n");
         return;

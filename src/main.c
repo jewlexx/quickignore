@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    IgnoreFile args = parse_args(argc, argv);
+    IgnoreArgs args = parse_args(argc, argv);
 
     request_url(&args);
 

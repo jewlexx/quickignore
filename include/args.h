@@ -13,10 +13,17 @@
 typedef struct {
     char *path;
     char *url;
-} IgnoreFile;
+} IgnoreArgs;
 
 void usage(int status);
 
-IgnoreFile parse_args(int argc, char *argv[]);
+/**
+ * @brief Parse command line arguments
+ *
+ * @param argc
+ * @param argv
+ * @return
+ */
+IgnoreArgs parse_args(int argc, char *argv[]);
 
 #endif // QUICKIGNORE_ARGS_H

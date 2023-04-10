@@ -9,6 +9,11 @@
 
 #include "args.h"
 
-void request_url(IgnoreFile *file);
+/**
+ * @brief Request a template from the given command line arguments.
+ *
+ * @param file
+ */
+void request_url(IgnoreArgs *file);
 
 #endif // QUICKIGNORE_REQUESTS_H

@@ -23,8 +23,8 @@ void usage(int status) {
     exit(status);
 }
 
-IgnoreFile parse_args(int argc, char *argv[]) {
-    IgnoreFile file = {
+IgnoreArgs parse_args(int argc, char *argv[]) {
+    IgnoreArgs file = {
             .url = NULL,
             .path = ".gitignore",
     };
