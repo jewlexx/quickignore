@@ -7,7 +7,8 @@
 static int remove_file = 0;
 
 void usage(int status) {
-    printf("usage: quickignore <URL> [OPTION]\n");
+    printf("Downloads the provided template from gitignore.io\n");
+    printf("usage: quickignore [OPTIONS]\n");
 
     printf("\t-n, --name=TEMPLATE\t"
            "Name of the template to grab. Can be a comma seperated list\n");
