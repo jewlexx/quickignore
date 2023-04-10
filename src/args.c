@@ -8,10 +8,7 @@ static int remove_file = 0;
 
 void usage(int status) {
     printf("Downloads the provided template from gitignore.io\n");
-    printf("usage: quickignore [OPTIONS]\n");
-
-    printf("\t-n, --name=TEMPLATE\t"
-           "Name of the template to grab. Can be a comma seperated list\n");
+    printf("usage: quickignore <TEMPLATES> [OPTIONS]\n");
 
     printf("\t-p, --path[=STRING]\t"
            "File path to write the gitignore to\n");
@@ -32,19 +29,28 @@ IgnoreFile parse_args(int argc, char *argv[]) {
             .path = ".gitignore",
     };
     int help_flag = 0;
-    char *name = NULL;
+
+    char *templates = argv[1];
+
+    if (templates == NULL) {
+        perror("Missing templates");
+        usage(1);
+    }
+    if (templates[0] == '-') {
+        perror("Templates must come before any options");
+        usage(1);
+    }
 
     struct option long_opts[] = {
             {"help",      no_argument, &help_flag, 1},
-            {"name",      required_argument, NULL, 'n'},
-            {"path",      optional_argument, NULL, 'p'},
+            {"path",      required_argument, NULL, 'p'},
             {"overwrite", no_argument,       NULL, 'o'},
     };
 
     int opt;
 
     while (1) {
-        opt = getopt_long(argc, argv, "n:p::oh", long_opts, NULL);
+        opt = getopt_long(argc, argv, "p:oh", long_opts, NULL);
 
         // No more options
         if (opt == -1) {
@@ -54,14 +60,6 @@ IgnoreFile parse_args(int argc, char *argv[]) {
         switch (opt) {
             case 'h':
                 help_flag = 1;
-
-                break;
-            case 'n': {
-                size_t len = strlen(optarg) + 1;
-                name = malloc(sizeof(char) * len);
-                strncpy(name, optarg, len);
-                name[sizeof(name) - 1] = '\0';
-            }
                 break;
             case 'p':
                 if (optarg != NULL) {
@@ -87,7 +85,7 @@ IgnoreFile parse_args(int argc, char *argv[]) {
     }
 
     char *base_url = "https://www.toptal.com/developers/gitignore/api/";
-    size_t total_url_size = strlen(name) + strlen(base_url);
+    size_t total_url_size = strlen(templates) + strlen(base_url);
 
     file.url = malloc(sizeof(char) * (total_url_size + 1));
 
@@ -95,7 +93,7 @@ IgnoreFile parse_args(int argc, char *argv[]) {
         file.url[i] = base_url[i];
     }
     for (int i = 48; i < total_url_size; i++) {
-        char next = name[i - 48];
+        char next = templates[i - 48];
         file.url[i] = next;
     }
     // Append null character

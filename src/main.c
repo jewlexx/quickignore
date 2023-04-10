@@ -11,9 +11,9 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    IgnoreFile file = parse_args(argc, argv);
+    IgnoreFile args = parse_args(argc, argv);
 
-    request_url(&file);
+    request_url(&args);
 
     return 0;
 }
