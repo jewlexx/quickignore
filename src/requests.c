@@ -4,27 +4,8 @@
 
 #include "../include/requests.h"
 
-char *path;
-
-typedef struct {
-    IgnoreFile *args;
-    FILE *fp;
-} OutputData;
-
-size_t write_data(void *buff, size_t size, size_t nmemb, FILE *userp) {
-    FILE *fp = userp->fp;
-
-    if (fp == NULL) {
-        perror("failed to open file\n");
-        exit(1);
-    }
-
+size_t write_data(void *buff, size_t size, size_t nmemb, FILE *fp) {
     size_t written = fwrite(buff, size, nmemb, fp);
-
-    if (fclose(fp)) /* Close the stream. */ {
-        perror("failed to close file");
-        exit(1);
-    }
 
     return written;
 }
@@ -41,6 +22,11 @@ void request_url(IgnoreFile *file) {
     }
 
     FILE *fp = fopen(file->path, "a");
+
+    if (fp == NULL) {
+        perror("failed to open file\n");
+        exit(1);
+    }
 
     curl_global_cleanup();
     CURL *curl = curl_easy_init();
