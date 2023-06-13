@@ -10,9 +10,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 typedef struct {
-    char *path;
-    char *url;
+  char *path;
+  char *url;
 } IgnoreArgs;
 
 void usage(int status);

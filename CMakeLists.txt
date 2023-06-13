@@ -3,7 +3,7 @@ project(quickignore VERSION 1.0.1 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(quickignore src/main.c src/args.c include/args.h src/requests.c include/requests.h)
+add_executable(quickignore src/main.c src/args.c include/args.h src/requests.c include/requests.h src/getopt.c include/getopt.h)
 
 find_package(CURL CONFIG REQUIRED)
 target_link_libraries(quickignore PRIVATE CURL::libcurl)

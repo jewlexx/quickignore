@@ -64,7 +64,7 @@ IgnoreArgs parse_args(int argc, char *argv[]) {
             case 'p':
                 if (optarg != NULL) {
                     size_t len = strlen(optarg) + 1 * sizeof(char);
-                    file.path = malloc(len * sizeof(char));
+                    file.path = calloc(len, sizeof(char));
                     strncpy(file.path, optarg, strlen(optarg));
                     file.path[strlen(file.path)] = '\0';
                 }
@@ -87,7 +87,7 @@ IgnoreArgs parse_args(int argc, char *argv[]) {
     char *base_url = "https://www.toptal.com/developers/gitignore/api/";
     size_t total_url_size = strlen(templates) + strlen(base_url);
 
-    file.url = malloc(sizeof(char) * (total_url_size + 1));
+    file.url = calloc(total_url_size + 1, sizeof(char));
 
     for (int i = 0; i < strlen(base_url); i++) {
         file.url[i] = base_url[i];
