@@ -4,6 +4,7 @@ static int remove_file = 0;
 
 void usage(int status) {
   printf("Downloads the provided template from gitignore.io\n");
+  printf("version: %s\n", VERSION);
   printf("usage: quickignore <TEMPLATES> [OPTIONS]\n");
 
   printf("\t-p, --path[=STRING]\t"
@@ -16,6 +17,9 @@ void usage(int status) {
   printf("\t-h, --help\t\t"
          "Print this help and exit.\n");
 
+  printf("\t-v, --version\t"
+         "Print the version and exit.\n");
+
   exit(status);
 }
 
@@ -25,22 +29,13 @@ IgnoreArgs parse_args(int argc, char *argv[]) {
       .path = ".gitignore",
   };
   int help_flag = 0;
-
-  char *templates = argv[1];
-
-  if (templates == NULL) {
-    perror("Missing templates");
-    usage(1);
-  }
-  if (templates[0] == '-') {
-    perror("Templates must come before any options");
-    usage(1);
-  }
+  int version_flag = 0;
 
   struct option long_opts[] = {
       {"help", no_argument, &help_flag, 1},
       {"path", required_argument, NULL, 'p'},
       {"overwrite", no_argument, NULL, 'o'},
+      {"version", no_argument, &version_flag, 1},
   };
 
   int opt;
@@ -56,6 +51,9 @@ IgnoreArgs parse_args(int argc, char *argv[]) {
     switch (opt) {
     case 'h':
       help_flag = 1;
+      break;
+    case 'v':
+      version_flag = 1;
       break;
     case 'p':
       if (optarg != NULL) {
@@ -78,6 +76,21 @@ IgnoreArgs parse_args(int argc, char *argv[]) {
 
   if (help_flag) {
     usage(0);
+  }
+  if (version_flag) {
+    printf("quickignore v%s\n", VERSION);
+    exit(0);
+  }
+
+  char *templates = argv[1];
+
+  if (templates == NULL) {
+    perror("Missing templates");
+    usage(1);
+  }
+  if (templates[0] == '-') {
+    perror("Templates must come before any options");
+    usage(1);
   }
 
   char *base_url = "https://www.toptal.com/developers/gitignore/api/";

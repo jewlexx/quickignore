@@ -1,9 +1,6 @@
 #include "../include/args.h"
 #include "../include/requests.h"
 
-// Defined by CMake
-static char *version = VERSION;
-
 int main(int argc, char *argv[]) {
   if (argc == 1) {
     usage(1);
