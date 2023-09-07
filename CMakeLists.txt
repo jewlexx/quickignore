@@ -5,7 +5,8 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(quickignore src/main.c src/args.c include/args.h src/requests.c include/requests.h src/getopt.c include/getopt.h)
 
-find_package(CURL CONFIG REQUIRED)
+include(FindPkgConfig)
+pkg_search_module(CURL REQUIRED curl)
 target_link_libraries(quickignore PRIVATE CURL::libcurl)
 
 set(CPACK_NSIS_MODIFY_PATH ON)
