@@ -1,7 +1,3 @@
-//
-// Created by Juliette Cordor on 6/04/2023.
-//
-
 #include "../include/requests.h"
 
 size_t write_data(void *buff, size_t size, size_t nmemb, FILE *fp) {

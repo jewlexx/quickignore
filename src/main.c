@@ -1,7 +1,3 @@
-//
-// Created by Juliette Cordor on 6/04/2023.
-//
-
 #include "../include/args.h"
 #include "../include/requests.h"
 

@@ -1,7 +1,3 @@
-//
-// Created by Juliette Cordor on 6/04/2023.
-//
-
 #ifndef QUICKIGNORE_ARGS_H
 #define QUICKIGNORE_ARGS_H
 
